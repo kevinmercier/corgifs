@@ -2,26 +2,38 @@
   <head>
     <title>Angular 2 QuickStart</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="styles.css">
 
     <!-- 1. Load libraries -->
-    <!-- IE required polyfill -->
+    <!-- IE required polyfills, in this exact order -->
     <script src="node_modules/es6-shim/es6-shim.min.js"></script>
+    <script src="node_modules/systemjs/dist/system-polyfills.js"></script>
     <script src="node_modules/angular2/es6/dev/src/testing/shims_for_IE.js"></script>
 
     <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
-    <script src="node_modules/rxjs/bundles/Rx.umd.js"></script>
-    <script src="node_modules/angular2/bundles/angular2-all.umd.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+    <script src="node_modules/rxjs/bundles/Rx.js"></script>
+    <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
 
-    <!-- 2. Load our 'modules' -->
-    <script src='app/app.component.js'></script>
-    <script src='app/main.js'></script>
+    <!-- 2. Configure SystemJS -->
+    <script>
 
+      System.config({
+        packages: {
+          app: {
+            format: 'register',
+            defaultExtension: 'js'
+          }
+        }
+      });
+      System.import('app/main')
+            .then(null, console.error.bind(console));
+
+    </script>
   </head>
-
-  <!-- 3. Display the application -->
   <body>
-    <my-app>Loading...</my-app>
+    <div class="appsvg" style="display: none;">
+        <!-- inject:svg --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><path id="icon-a" stroke="#171717" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" fill="none" d="M11.6 65.55q1-4 2.9-8l16-6.85q-2.15-2.8-3.1-6.3-.45.05-.9.05-1.7 0-2.85-1.2-1.15-1.2-1.15-2.8 0-1.65 1.15-2.85 1.15-1.15 2.85-1.15h.05q.05-2.15.5-4.05 0-.05.05-.1-5.4-14.75 4.5-20.4 5.95 2.9 16.55 1.4 9.55-1.45 7.8 20.05-.15 1.5-.3 3.15 1.2.2 2.15 1.1 1.2 1.2 1.2 2.85 0 1.6-1.2 2.8-1.15 1.2-2.8 1.2-.45 0-.85-.05-1.1 3.6-3.3 6.45-4.15 5.55-10.1 5.55-5.9 0-10.05-5.55-.15-.1-.2-.15m-3.4-18.4v.1q14.7 1.2 20.5-7.95 1.1 7.35 8.35 8.9m-28.9-.95h.05m24.45 18.3l16 6.85q1.95 4 2.9 8"/></defs><symbol id="icon-one" viewBox="0 0 80 80"><use xlink:href="#icon-a"/></symbol></svg><!-- endinject -->
+    </div>
+    <my-app></my-app>
   </body>
-
 </html>

@@ -17,7 +17,7 @@ gulp.task('styles', function() {
 		.pipe(gulp.dest('app/assets/src/css'))
 		.pipe(plugins.minifyCss({ keepSpecialComments: 1 }))
 		.pipe(plugins.livereload(server))
-		.pipe(gulp.dest('app/compiled/assets/css'))
+		.pipe(gulp.dest('app/assets/compiled/css'))
 		.pipe(plugins.notify({ message: 'Styles Task Complete' }));
 		gulp.src('app/assets/src/css', {read: false})
 			.pipe(plugins.clean());
@@ -58,9 +58,9 @@ gulp.task('svgstore', function () {
     function fileContents (filePath, file) {
         return file.contents.toString();
     }
-    gulp.src('app/index.html')
+    gulp.src('index.html')
         .pipe(plugins.inject(svgs, { transform: fileContents }))
-        .pipe(gulp.dest('app/'))
+        .pipe(gulp.dest(''))
 		.pipe(plugins.notify({ message: 'SVG Integration Complete' }));
 });
 
@@ -72,7 +72,7 @@ gulp.task('watch', function() {
 		};
 		gulp.watch('app/assets/src/scss/**/*.scss', ['styles']);
 		gulp.watch('app/assets/src/images/*', ['compress_images']);
-		gulp.watch(['app/assets/src/svg/**/*', 'app/index.html'], ['svgstore']);
+		gulp.watch(['app/assets/src/svg/**/*', 'index.html'], ['svgstore']);
 	});
 });
 
